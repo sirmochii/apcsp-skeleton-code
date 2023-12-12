@@ -22,10 +22,6 @@ def wikipedia_game_solver(start_page, target_page):
   
     # FINISH THE CODE HERE
 
-    end_time = time.time()
-    print("This algorithm took", end_time-start_time, "seconds to run!")
-   visited = []
-
     queue = Queue()
 
     parent={}
