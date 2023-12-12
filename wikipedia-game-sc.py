@@ -24,8 +24,46 @@ def wikipedia_game_solver(start_page, target_page):
 
     end_time = time.time()
     print("This algorithm took", end_time-start_time, "seconds to run!")
-  
+   visited = []
+
+    queue = Queue()
+
+    parent={}
+   
+    path = []
+
+    queue.put(start_page.title)
+
+    while not queue.empty():
+        current_page_title = queue.get()
+        if current_page_title == target_page.title:
+            break
+
+        current_page = wiki_wiki.page(current_page_title)
+
+        current_links = fetch_links(current_page)
+
+        visited.append(current_page)
+
+        for thing in current_links:
+            if thing not in visited:
+                queue.put(thing)
+                parent[thing] = current_page_title
+   
+    child = target_page.title
+
+    while child != start_page.title:
+        path.append(child)
+        child = parent[child]
+    path.append(start_page.title)
+    path.reverse()
+        #(queue.get())
+
+    end_time = time.time()
+    print("This algorithm took", end_time-start_time, "seconds to run!")
     return path
+
+print(fetch_links(wiki_wiki.page('Dwayne Johnson')))
 
 # Example usage:
 start_page = wiki_wiki.page('Nina Tandon')
